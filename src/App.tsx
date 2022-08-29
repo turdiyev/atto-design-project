@@ -1,7 +1,8 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import { Counter } from "./features/counter/Counter";
+import "./styles/index.css";
+import "./App.css";
 
 function App() {
   return (
@@ -9,11 +10,11 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <Counter />
-        <p>
+        <p className="text-primary">
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
         <span>
-          <span>Learn </span>
+          <span className="text-red-600">Learn </span>
           <a
             className="App-link"
             href="https://reactjs.org/"
@@ -33,7 +34,7 @@ function App() {
           </a>
           <span>, </span>
           <a
-            className="App-link"
+            className="text-3xl font-bold underline"
             href="https://redux-toolkit.js.org/"
             target="_blank"
             rel="noopener noreferrer"
@@ -42,7 +43,7 @@ function App() {
           </a>
           ,<span> and </span>
           <a
-            className="App-link"
+            className="text-3xl font-bold underline"
             href="https://react-redux.js.org/"
             target="_blank"
             rel="noopener noreferrer"

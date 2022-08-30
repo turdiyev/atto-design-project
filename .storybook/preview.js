@@ -12,6 +12,7 @@ export const parameters = {
   docs: {
     theme: themes.dark,
   },
+  darkMode: true,
   backgrounds: {
     default: "Dark Mode",
     values: [

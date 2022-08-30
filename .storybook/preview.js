@@ -1,5 +1,5 @@
-import "../src/styles/index.css"
-import { themes } from '@storybook/theming';
+import "../src/styles/index.css";
+import { themes } from "@storybook/theming";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -13,10 +13,18 @@ export const parameters = {
     theme: themes.dark,
   },
   backgrounds: {
-    default: 'Dark Mode',
+    default: "Dark Mode",
     values: [
-      { name: 'Dark Mode', value: '#1f2f7a' },
-      { name: 'Light Mode', value: '#fff' },
+      {
+        name: "Dark Mode",
+        value: "#1f2f7a",
+        class: ["theme-dark", "dark-mode"],
+      },
+      {
+        name: "Light Mode",
+        value: "#fff",
+        class: ["theme-light", "light-mode"],
+      },
     ],
   },
-}
+};

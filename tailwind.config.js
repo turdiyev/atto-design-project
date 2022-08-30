@@ -1,10 +1,30 @@
-/** @type {import('tailwindcss').Config} */ 
+const colors = require("tailwindcss/colors");
+
 module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-  ],
+  mode: 'jit',
+  darkMode: "class",  
   theme: {
-    extend: {},
+    colors: {
+      primary: "var(--color-primary)",
+      secondary: "var(--color-secondary)",
+      neutral: "var(--color-neutral)",
+      white: colors.white,
+      black: colors.black,
+      blue: colors.blue,
+      gray: colors.gray,
+      red: colors.red,
+    },
+    extend: {
+      fontFamily: {
+        sans: ["Manrope", "sans-serif"],
+      },
+    },
+  },
+  variants: {
+    extend: {
+      animation: ['group-hover'],
+    },
   },
   plugins: [],
-}
+  content: ["./src/**/*.{js,jsx,ts,tsx,html}", "./public/index.html"],
+};

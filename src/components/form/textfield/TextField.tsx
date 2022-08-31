@@ -6,6 +6,7 @@ export default function TextField({ className = '', mode = "filled", type = "def
       <input
         id='input'
         {...props}
+        disabled={Boolean(type === "disabled")}
         className={`
         peer appearance-none font-semibold z-10 placeholder-gray-100 
         placeholder-opacity-0 block w-full px-4 h-[48px] py-8 pb-6
@@ -18,7 +19,8 @@ export default function TextField({ className = '', mode = "filled", type = "def
         ${className}`}
         placeholder="..."
       />
-      <label htmlFor='input' className="
+      <label htmlFor='input' className={`
+      ${type === "disabled" && "cursor-not-allowed"}
       text-gray-400
       font-semibold
       text-xs
@@ -29,7 +31,7 @@ export default function TextField({ className = '', mode = "filled", type = "def
       peer-placeholder-shown:translate-x-0
       -translate-y-1.5
       absolute top-3 left-4 
-      transition-all">
+      transition-all`}>
         {props.placeholder}
         Label
       </label>
@@ -43,7 +45,7 @@ type Props = React.DetailedHTMLProps<
   HTMLInputElement
 > & {
   placeholder?: string; className?: string,
-  type?: "error" | "valid" | "default";
+  type?: "error" | "valid" | "default" | "disabled";
   mode?: "filled" | "outlined" | "standard";
 };
 
@@ -51,11 +53,12 @@ type Props = React.DetailedHTMLProps<
 const Types = {
   error: "outline !outline-1 !outline-red-500 !outline-error",
   valid: "outline !outline-1 !outline-green-500 !outline-primary",
+  disabled: "cursor-not-allowed opacity-75",
   default: ""
 };
 
 const Modes = {
   filled: "bg-black/20 text-white autofill:bg-black border-none dark:text-white ",
-  outlined: "bg-transparent border border-1 border-gray-500 text-white",
-  standard: "bg-transparent !focus:outline-none !outline-none border-b text-white  rounded-none "
+  outlined: "bg-transparent border border-2 border-gray-500 text-white",
+  standard: "bg-transparent !focus:outline-none !outline-none border-b text-white"
 };

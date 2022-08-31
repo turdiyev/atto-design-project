@@ -51,3 +51,9 @@ export const error = Template.bind({});
 error.args = {
   type: 'error'
 };
+
+export const disabled = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+disabled.args = {
+  type: 'disabled'
+};

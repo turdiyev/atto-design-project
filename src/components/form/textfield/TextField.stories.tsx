@@ -19,6 +19,25 @@ const Template: ComponentStory<typeof TextField> = (args) => <TextField {...args
 export const filled = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 filled.args = {
+  mode: 'filled'
+};
+
+export const outlined = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+outlined.args = {
+  mode: 'outlined'
+};
+
+export const standard = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+standard.args = {
+  mode: 'standard'
+};
+
+export const defaultFilled = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+defaultFilled.args = {
+  type: 'default'
 };
 
 export const valid = Template.bind({});

@@ -13,6 +13,7 @@ module.exports = {
       blue: colors.blue,
       gray: colors.gray,
       red: colors.red,
+      transparent: 'transparent',
     },
     extend: {
       fontFamily: {

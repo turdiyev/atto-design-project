@@ -1,35 +1,25 @@
 import React from 'react';
 
-type Props = React.DetailedHTMLProps<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
-> & {
-  placeholder?: string; className?: string,
-  type?: "error" | "valid" | "default";
-};
-
-export default function TextField({ className = '', type = "default", ...props }: Props): JSX.Element {
+export default function TextField({ className = '', mode = "filled", type = "default", ...props }: Props): JSX.Element {
   return (
     <div className="relative">
       <input
         id='input'
         {...props}
         className={`
-       
         peer appearance-none font-semibold z-10 placeholder-gray-100 
-        placeholder-opacity-0 block w-full px-4 h-[48px] py-8 pb-6 border border-none 
-      dark:bg-black/20 dark:text-white 
-      autofill:bg-black 
+        placeholder-opacity-0 block w-full px-4 h-[48px] py-8 pb-6
         rounded-md focus:outline-none
         focus:ring-indigo-500
         focus:outline-green-500 focus:outline-primary focus:outline-1 focus:z-10 sm:text-sm 
         placeholder-transparent
+        ${Modes[mode] || ""}
         ${Types[type] || ""}
         ${className}`}
-        placeholder="need to be here"
+        placeholder="..."
       />
       <label htmlFor='input' className="
-      dark:text-white/70 text-black/70 
+      text-gray-400
       font-semibold
       text-xs
       peer-focus:text-xs
@@ -48,9 +38,24 @@ export default function TextField({ className = '', type = "default", ...props }
 }
 
 
+type Props = React.DetailedHTMLProps<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
+> & {
+  placeholder?: string; className?: string,
+  type?: "error" | "valid" | "default";
+  mode?: "filled" | "outlined" | "standard";
+};
+
+
 const Types = {
   error: "outline !outline-1 !outline-red-500 !outline-error",
   valid: "outline !outline-1 !outline-green-500 !outline-primary",
   default: ""
 };
 
+const Modes = {
+  filled: "bg-black/20 text-white autofill:bg-black border-none dark:text-white ",
+  outlined: "bg-transparent border border-1 border-gray-500 text-white",
+  standard: "bg-transparent !focus:outline-none !outline-none border-b text-white  rounded-none "
+};

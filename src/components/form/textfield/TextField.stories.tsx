@@ -20,3 +20,9 @@ export const filled = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 filled.args = {
 };
+
+export const error = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+error.args = {
+  type: 'error'
+};

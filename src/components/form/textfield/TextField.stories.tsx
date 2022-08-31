@@ -21,6 +21,12 @@ export const filled = Template.bind({});
 filled.args = {
 };
 
+export const valid = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+valid.args = {
+  type: 'valid'
+};
+
 export const error = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 error.args = {

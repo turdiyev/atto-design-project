@@ -49,8 +49,8 @@ export default function TextField({ className = '', type = "default", ...props }
 
 
 const Types = {
-  error: "outline !outline-1 !outline-red-500 !outline-error ",
-  valid: "outline-green-500",
+  error: "outline !outline-1 !outline-red-500 !outline-error",
+  valid: "outline !outline-1 !outline-green-500 !outline-primary",
   default: ""
 };
 

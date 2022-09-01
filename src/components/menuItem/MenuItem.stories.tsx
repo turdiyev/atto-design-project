@@ -19,23 +19,22 @@ const Template: ComponentStory<typeof MenuItem> = (args) => <MenuItem {...args} 
 export const item = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 item.args = {
-  mode: "item"
 };
 
-export const withLefticon = Template.bind({});
+export const withIcon = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-withLefticon.args = {
-  mode: "withLeftIcon"
+withIcon.args = {
+  withIcon: true
 };
 
 export const withArrowIcon = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 withArrowIcon.args = {
-  mode: "withArrowIcon"
+  withArrowIcon: true
 };
 
-export const withBothIcon = Template.bind({});
+export const withPinIcon = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-withBothIcon.args = {
-  mode: "withBothIcon"
+withPinIcon.args = {
+  withPinIcon: true
 };

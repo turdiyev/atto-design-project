@@ -11,8 +11,14 @@ export default function Sidebar({ }: Props) {
 
         <div className="flex-col space-y-4">
 
-          <div className="flex flex-row space-x-2 items-center ml-2 py-2">
+          <div className="flex flex-row space-x-2 items-center justify-between ml-2 py-2">
             <h6 className="text-2xl font-bold text-white">ATTO</h6>
+
+            <span className="hover:cursor-pointer pr-2 flex items-center justify-center">
+              <svg className="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+              </svg>
+            </span>
           </div>
 
           <ul className="flex flex-col space-y-2 mt-24">

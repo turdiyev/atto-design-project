@@ -4,9 +4,9 @@ import Loader from "./Loader";
 export default {
   title: "Component/Loader",
   component: Loader,
-  parametrs: {
-    layout: "fullscreen"
-  }
+  parameters: {
+    layout: "centered",
+  },
 } as ComponentMeta<typeof Loader>
 
 const Teamplate: ComponentStory<typeof Loader> = (args) => <Loader {...args} />

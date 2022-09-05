@@ -1,6 +1,7 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import Input from "./Input";
+import MaskedInput from "./Masked";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -15,15 +16,23 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof Input> = (args) => <Input {...args} />;
+const MaskedTemplate: ComponentStory<typeof MaskedInput> = (args) => <MaskedInput {...args} />;
 
 export const input = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-input.args = {
-};
+input.args = {};
 
 export const inputNumber = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
 inputNumber.args = {
-  type: "number"
+  type: "number",
 };
 
+export const MaskedPhone = MaskedTemplate.bind({});
+MaskedPhone.args = {
+  type: "text",
+  maskProps: {
+    mask: '+\\9\\98 99 999 99 99',
+    maskPlaceholder: null,
+  },
+  name: "pan",
+  placeholder: "Phone Number"
+};

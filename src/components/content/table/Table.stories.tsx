@@ -1,6 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import Table, { TableColumn } from "./Table";
-import * as TableColumnStories from "./TableColumn.stories";
 
 export default {
   title: "Component/Table",
@@ -15,10 +14,11 @@ const Template: ComponentStory<typeof Table> = (args) => <Table {...args} />;
 export const SimpleTable = Template.bind({});
 SimpleTable.args = {
   data: [
-    { name: "HI", count: 21, amount: 200000, percantage: 23 },
+    { name: "HI", count: 21, amount: 2000, percantage: 23 },
     { name: "HI", count: 60, amount: 230000, percantage: 67 },
-    { name: "HI", count: 66, amount: 324, percantage: 87 },
-    { name: "HI", count: 10, amount: 324, percantage: 56 },
+    { name: "HI", count: 66, amount: 32000, percantage: 87 },
+    { name: "HI", count: 10, amount: 80000, percantage: 56 },
+    { name: "HI", count: 10, amount: 1500, percantage: 56 },
   ],
   children: [
     <TableColumn type="selection" width={55} />,
@@ -31,17 +31,17 @@ SimpleTable.args = {
       label="COunt"
       prop="count"
       align="center"
-      //   cellRenderer={(row) => <div>row</div>}
     />,
     <TableColumn
       label="$"
       prop="amount"
       align="right"
-      //   cellRenderer={(row) => <div>row</div>}
+      sortable
     />,
     <TableColumn
       label="%"
-      prop="percentage"
+      prop="percantage"
+      sortable
       align="center"
       cellRenderer={(row: any) => <div>{row.percantage}%</div>}
     />,

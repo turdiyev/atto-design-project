@@ -21,6 +21,7 @@ SimpleTable.args = {
     { name: "HI", count: 10, amount: 324, percantage: 56 },
   ],
   children: [
+    <TableColumn type="selection" width={55} />,
     <TableColumn
       label="Name"
       prop="name"
@@ -29,17 +30,34 @@ SimpleTable.args = {
     <TableColumn
       label="COunt"
       prop="count"
+      align="center"
       //   cellRenderer={(row) => <div>row</div>}
     />,
     <TableColumn
       label="$"
       prop="amount"
+      align="right"
       //   cellRenderer={(row) => <div>row</div>}
     />,
     <TableColumn
       label="%"
       prop="percentage"
+      align="center"
       cellRenderer={(row: any) => <div>{row.percantage}%</div>}
+    />,
+    <TableColumn
+      // prop="percentage"
+      label="Action"
+      width={80}
+      align="right"
+      cellRenderer={(row: any) => (
+        <a
+          href="/"
+          className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+        >
+          Edit
+        </a>
+      )}
     />,
   ],
 };

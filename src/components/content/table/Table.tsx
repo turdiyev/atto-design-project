@@ -25,7 +25,7 @@ export default function Table<
     if (sortState && onSortChange) {
       onSortChange(sortState);
     }
-    console.log('sortState -- ',  sortState);
+    console.log("sortState -- ", sortState);
     if (sortState.order === "asc") {
       changeData((prevData) => {
         prevData.sort(
@@ -119,10 +119,17 @@ export function TableColumn<T>({
   const curOrder = sortState?.order || "none";
 
   function onSortClick(event: React.MouseEvent<HTMLButtonElement>) {
-    setSortState((prevState) => ({
-      prop,
-      order: SortOrderNext[(prevState?.order as string) || "none"],
-    }));
+    setSortState((prevState) => {
+      const nextOrder =
+        SortOrderNext[
+          (prevState.prop === prop && (prevState?.order as string)) || "none"
+        ];
+
+      return {
+        prop,
+        order: nextOrder,
+      };
+    });
   }
   if (typeof rest.width === "number") {
     rest.width = rest.width + "px";
@@ -132,12 +139,16 @@ export function TableColumn<T>({
       {type === "normal" && label}
       {type === "selection" && <TableCheckbox />}
       {sortable && (
-        <button onClick={onSortClick}>
+        <button
+          onClick={onSortClick}
+          aria-label="Sort Icon Button"
+          className={`${
+            sortState?.prop === prop && SortClasses[curOrder || "none"]
+          }`}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className={`ml-1 w-3 h-3 ${
-              sortState?.prop === prop && SortClasses[curOrder || "none"]
-            }`}
+            className={`ml-1 w-3 h-3 `}
             aria-hidden="true"
             fill="currentColor"
             viewBox="0 0 320 512"
@@ -156,9 +167,9 @@ TableColumn.defaultProps = {
 };
 
 const SortClasses: { [key: string]: string } = {
-  asc: "sorted-asc bg-primary",
-  desc: "sorted-desc bg-secondary",
-  none: "",
+  asc: "sorted-asc text-primary",
+  desc: "sorted-desc text-secondary",
+  none: "no-sorted",
 };
 const SortOrderNext: SortStateType = {
   none: "asc",

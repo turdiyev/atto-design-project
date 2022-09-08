@@ -1,18 +1,50 @@
+import { useState } from "react"
 import Button from "../button/Button"
 
-type Props = {}
+type Props = {
+  variant: 'hover' | 'click' | 'focus'
+}
 
-export default function Popover({ }: Props) {
+export default function Popover({
+
+  variant = "click",
+
+}: Props) {
+
+  const [open, setOpen] = useState<Boolean>(false)
+
   return (
     <div className="relative">
 
-      <Button className={'peer bg-secondary '}>
-        Hover to activate
+      <Button className={'peer bg-secondary '}
+        onClick={() => {
+          if (variant === 'click') setOpen(!open)
+        }}
+        onBlur={(e) => {
+          setOpen(false)
+        }}
+        onMouseDown={() => {
+          if (variant === 'focus') setOpen(true)
+        }}
+        onMouseUp={() => {
+          if (variant === 'focus') setOpen(false)
+        }}
+        id="popover"
+      >
+        {variant === 'hover' && 'Hover to activate'}
+        {variant === 'click' && 'Click to activate'}
+        {variant === 'focus' && 'Focus to activate'}
       </Button>
 
-      <div className="shadow-md transition duration-300 ease-in-out translate-x-[-24%] absolute
-      bottom-[70px] opacity-0 peer-hover:opacity-100 flex flex-col  w-[400px]
-        bg-white p-4 rounded">
+      <div className={`shadow-md transition duration-300 ease-in-out translate-x-[-24%] absolute
+          bottom-[70px] flex flex-col opacity-0 w-[400px]
+        bg-white p-4 rounded 
+        
+        ${variant === 'hover' && 'peer-hover:opacity-100'}
+        ${(variant === 'click' && open) && 'opacity-100'}
+        ${(variant === 'focus' && open) && 'opacity-100'}
+        
+        `}>
         <h1 className="text-md font-semibold mb-2 mt-0 ml-0 ">
           Title to context
         </h1>

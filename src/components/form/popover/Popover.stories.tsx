@@ -19,6 +19,19 @@ const Template: ComponentStory<typeof Popover> = (args) => <Popover {...args} />
 export const hover = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 hover.args = {
+  variant: 'hover'
+};
+
+export const click = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+click.args = {
+  variant: 'click'
+};
+
+export const focus = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+focus.args = {
+  variant: 'focus'
 };
 
 

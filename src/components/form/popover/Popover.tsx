@@ -10,8 +10,8 @@ export default function Popover({ }: Props) {
         Hover to activate
       </Button>
 
-      <div className="hidden shadow-md transition duration-300 ease-in-out translate-x-[-24%] absolute
-      bottom-[70px] peer-hover:flex flex-col  w-[400px]
+      <div className="shadow-md transition duration-300 ease-in-out translate-x-[-24%] absolute
+      bottom-[70px] opacity-0 peer-hover:opacity-100 flex flex-col  w-[400px]
         bg-white p-4 rounded">
         <h1 className="text-md font-semibold mb-2 mt-0 ml-0 ">
           Title to context

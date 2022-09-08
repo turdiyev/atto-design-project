@@ -39,7 +39,7 @@ export default function Popover({
       <div className={`shadow-md transition duration-300 ease-in-out translate-x-[-24%] absolute
           bottom-[70px] flex flex-col opacity-0 w-[400px]
         bg-white p-4 rounded 
-        
+
         ${variant === 'hover' && 'peer-hover:opacity-100'}
         ${(variant === 'click' && open) && 'opacity-100'}
         ${(variant === 'focus' && open) && 'opacity-100'}
@@ -51,6 +51,7 @@ export default function Popover({
         <p className="text-sm font-semibold text-gray-600 ">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium dolore voluptatum illum ex?
         </p>
+        {/* TRIANGLE */}
         <div className="w-3 h-3 border-solid absolute bottom-[-12px] left-[46%] border-t-white border-t-8 border-x-transparent border-x-8 border-b-0"></div>
       </div>
 

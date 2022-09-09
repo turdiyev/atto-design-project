@@ -1,4 +1,5 @@
 import React, { useContext, useId, useState, useEffect } from "react";
+import { useDataChange } from "./Table.hooks";
 import { TableContext, TableProvider } from "./Table.provider";
 import { SortDataType, SortStateType } from "./Table.types";
 
@@ -12,44 +13,17 @@ type Props<T> = {
   onSortChange?: (sortData: SortDataType) => void;
 };
 
-export default function Table<
-  T extends { [key: string]: string | number | boolean }
->({ data, rowKeyId = "id", onSortChange, children }: Props<T>) {
-  const [innerData, changeData] = useState<T[]>(data);
-  const [sortState, setSortState] = useState<SortDataType>({
-    order: "none",
-    prop: undefined,
-  });
+export default function Table<T extends any>({
+  data: tableData,
+  rowKeyId = "id",
+  onSortChange,
+  children,
+}: Props<T>) {
+  const { sortState, setSortState, data } = useDataChange<T>(
+    tableData,
+    onSortChange
+  );
 
-  useEffect(() => {
-    if (sortState && onSortChange) {
-      onSortChange(sortState);
-    }
-    console.log("sortState -- ", sortState);
-    if (sortState.order === "asc") {
-      changeData((prevData) => {
-        prevData.sort(
-          (a: any, b: any) =>
-            a[sortState.prop as string] - b[sortState.prop as string]
-        );
-
-        return [...prevData];
-      });
-    }
-    if (sortState.order === "desc") {
-      changeData((prevData) => {
-        prevData.sort(
-          (a: any, b: any) =>
-            b[sortState.prop as string] - a[sortState.prop as string]
-        );
-
-        return [...prevData];
-      });
-    }
-    if (sortState.order === "none") {
-      changeData((prevData) => [...data]);
-    }
-  }, [onSortChange, sortState]);
   return (
     <TableProvider sortStateArr={[sortState, setSortState]}>
       <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
@@ -58,25 +32,7 @@ export default function Table<
             <tr>{children}</tr>
           </thead>
           <tbody>
-            {innerData.map((li, index) => (
-              <tr
-                key={index || Date.now()}
-                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-              >
-                {React.Children.map(children, (child) => (
-                  <td
-                    className={CellClasses[child.props.type || "normal"]}
-                    key={child.key}
-                    align={child.props.align}
-                  >
-                    {(child.props.type === "normal" &&
-                      child.props?.cellRenderer?.(li)) ||
-                      (child.props.prop && li[child.props.prop])}
-                    {child.props.type === "selection" && <TableCheckbox />}
-                  </td>
-                ))}
-              </tr>
-            ))}
+            <TableRows rows={data} columnNodes={children} />
           </tbody>
         </table>
       </div>
@@ -203,5 +159,111 @@ function TableCheckbox(
         checkbox
       </label>
     </div>
+  );
+}
+type TableRowProps<T extends any> = {
+  rows: T[];
+  columnNodes: React.ReactElement<ColumnProps<T>>[];
+  withIndent?: boolean;
+  expanded?: boolean;
+};
+
+function TableRows<T extends any>({
+  rows,
+  columnNodes,
+  withIndent,
+  expanded = false,
+}: TableRowProps<T>) {
+  const hasControlColumn = (
+    React.Children.toArray(columnNodes) as React.ReactElement[]
+  ).some((child) => child.props.type !== "normal");
+  console.log("Table rows -- ", rows);
+
+  return (
+    <>
+      {rows.map((li, index) => (
+        <TableRowItem
+          item={li}
+          collapsed={!expanded}
+          columnNodes={columnNodes}
+          withIndent={withIndent}
+          hasControlColumn={hasControlColumn}
+        />
+      ))}
+    </>
+  );
+}
+type TableRowItemProps<T> = {
+  item: T;
+  columnNodes: React.ReactElement[];
+  withIndent?: boolean;
+  hasControlColumn?: boolean;
+  collapsed?: boolean;
+};
+const ExpandIconClass: { [key: string]: string } = {
+  true: "rotate-90",
+  false: "",
+};
+const ExpandRowClass: { [key: string]: string } = {
+  true: "hidden",
+  false: "visible",
+};
+function TableRowItem<T>({
+  item,
+  columnNodes,
+  withIndent = false,
+  collapsed = false,
+  hasControlColumn = false,
+}: TableRowItemProps<T>) {
+  const hasChildren = (item as any).children?.length;
+  const [childrenExpanded, setChildExpanded] = useState<boolean>(false);
+  const onExpandClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e && e.preventDefault();
+    setChildExpanded((p) => !p);
+  };
+  return (
+    <>
+      <tr
+        key={Date.now() + Math.random()}
+        className={`${
+          ExpandRowClass[String(!collapsed)]
+        } bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600`}
+      >
+        {React.Children.map(columnNodes, (child, index) => (
+          <td
+            className={`${CellClasses[child.props.type || "normal"]} ${
+              withIndent && index === Number(hasControlColumn) ? "pl-16" : ""
+            }`}
+            key={child.key}
+            align={child.props.align}
+          >
+            {index === Number(hasControlColumn) &&
+              (item as any).children?.length && (
+                <button
+                  onClick={onExpandClick}
+                  className={`${
+                    ExpandIconClass[String(!childrenExpanded)]
+                  } text-lg -ml-2 w-6 h-6 inline-flex items-center justify-center`}
+                >
+                  »
+                </button>
+              )}
+            {(child.props.type === "normal" &&
+              child.props?.cellRenderer?.(item)) ||
+              (child.props.prop && (item as any)[child.props.prop])}
+            {child.props.type === "selection" && <TableCheckbox />}
+          </td>
+        ))}
+      </tr>
+      {hasChildren && (
+        <TableRows
+          key={Date.now() + Math.random()}
+          rows={(item as any).children}
+          columnNodes={columnNodes}
+          withIndent={true}
+          expanded={childrenExpanded}
+        />
+      )}
+    </>
   );
 }

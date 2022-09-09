@@ -53,7 +53,6 @@ SortableTable.args = {
     { fullName: "Kim Ann", count: 10, amount: 1500, percantage: 56 },
   ],
   children: [
-    <TableColumn type="selection" width={55} />,
     <TableColumn
       label="Full Name"
       prop="fullName"
@@ -105,4 +104,136 @@ SortableTable.play = async ({ args, canvasElement }) => {
   // //second btn third click
   // await userEvent.click(sortBtn2);
   // expect(sortBtn2).toHaveClass("no-sorted");
+};
+
+export const SelectionTable = Template.bind({});
+SelectionTable.args = {
+  data: [
+    { fullName: "John Smith", count: 21, amount: 2000, percantage: 23 },
+    { fullName: "George Adam", count: 60, amount: 230000, percantage: 67 },
+    { fullName: "Tom Jhonson", count: 66, amount: 32000, percantage: 87 },
+    {
+      fullName: "Alexander Thunderlend",
+      count: 10,
+      amount: 80000,
+      percantage: 56,
+    },
+    { fullName: "Kim Ann", count: 10, amount: 1500, percantage: 56 },
+  ],
+  children: [
+    <TableColumn type="selection" width={55} />,
+    <TableColumn
+      label="Full Name"
+      prop="fullName"
+      cellRenderer={(row: any) => <strong>{row.fullName}</strong>}
+    />,
+    <TableColumn label="Count" prop="count" align="center" />,
+    <TableColumn label="$" prop="amount" align="right" sortable />,
+    <TableColumn
+      label="%"
+      prop="percantage"
+      sortable
+      align="center"
+      cellRenderer={(row: any) => <div>{row.percantage}%</div>}
+    />,
+    <TableColumn
+      // prop="percentage"
+      label="Action"
+      width={80}
+      align="right"
+      cellRenderer={(row: any) => (
+        <a
+          href="/"
+          className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+        >
+          Edit
+        </a>
+      )}
+    />,
+  ],
+};
+SelectionTable.play = async ({ args, canvasElement }) => {
+  const canvas = within(canvasElement);
+};
+
+export const TableWithChildren = Template.bind({});
+TableWithChildren.args = {
+  data: [
+    {
+      fullName: "You Thong",
+
+      count: 21,
+      amount: 2000,
+      percantage: 23,
+      children: [
+        { fullName: "One Smith", count: 21, amount: 2000, percantage: 23 },
+        {
+          fullName: "George Adam",
+          count: 60,
+          amount: 230000,
+          percantage: 67,
+        },
+        { fullName: "Tom Jhonson", count: 66, amount: 32000, percantage: 87 },
+        {
+          fullName: "Alexander Thunderlend",
+          count: 10,
+          amount: 80000,
+          percantage: 56,
+        },
+        { fullName: "Kim Ann", count: 10, amount: 1500, percantage: 56 },
+      ],
+    },
+    { fullName: "George Adam", count: 60, amount: 230000, percantage: 67 },
+    { fullName: "Tom Jhonson", count: 66, amount: 32000, percantage: 87 },
+    {
+      fullName: "Alexander Thunderlend",
+      count: 10,
+      amount: 80000,
+      percantage: 56,
+      children: [
+        { fullName: "John Smith", count: 21, amount: 2000, percantage: 23 },
+        { fullName: "George Adam", count: 60, amount: 230000, percantage: 67 },
+        { fullName: "Tom Jhonson", count: 66, amount: 32000, percantage: 87 },
+        {
+          fullName: "Alexander Thunderlend",
+          count: 10,
+          amount: 80000,
+          percantage: 56,
+        },
+        { fullName: "Kim Ann", count: 10, amount: 1500, percantage: 56 },
+      ]
+    },
+    { fullName: "Kim Ann", count: 10, amount: 1500, percantage: 56 },
+  ],
+  children: [
+    <TableColumn type="selection" width={55} />,
+    <TableColumn
+      label="Full Name"
+      prop="fullName"
+      cellRenderer={(row: any) => <strong>{row.fullName}</strong>}
+    />,
+    <TableColumn label="Count" prop="count" align="center" />,
+    <TableColumn label="$" prop="amount" align="right" sortable />,
+    <TableColumn
+      label="%"
+      prop="percantage"
+      sortable
+      align="center"
+      cellRenderer={(row: any) => <div>{row.percantage}%</div>}
+    />,
+    <TableColumn
+      // prop="percentage"
+      label="Action"
+      width={80}
+      align="right"
+      cellRenderer={(row: any) => (
+        <a
+          href="/"
+          className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+        >
+          Edit
+        </a>
+      )}
+    />,
+  ],
 };

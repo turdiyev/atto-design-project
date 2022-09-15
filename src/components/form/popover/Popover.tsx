@@ -38,12 +38,16 @@ export default function Popover({
         {variant === 'Focus' && 'Focus to activate'}
       </Button>
 
-      <div className={`shadow-md transition duration-300 ease-in-out absolute
-          ${PostionClasses[position] || ""}
-          ${VariantsClasses[variant] || ""}
+      <div className={`shadow-md transition duration-300 ease-in-out 
+          absolute
           flex flex-col opacity-0 w-[400px] bg-white  rounded
+          
+        ${PostionClasses[position] || ""}
+        ${variant === 'Hover' && 'peer-hover:opacity-100'}
+        ${(variant === 'Click' && open) && 'opacity-100'}
+        ${(variant === 'Focus' && open) && 'opacity-100'}
+        
         `}>
-
         <div className="relative p-4 rounded">
           <h1 className="text-md font-semibold mb-2 mt-0 ml-0 ">
             Title to context
@@ -79,12 +83,6 @@ export default function Popover({
 
     </div >
   )
-}
-
-const VariantsClasses = {
-  Hover: 'peer-hover:opacity-100',
-  Click: 'opacity-100',
-  Focus: 'opacity-100',
 }
 
 const PostionClasses = {

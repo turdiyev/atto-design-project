@@ -15,7 +15,11 @@ export default function Button({
         Variants[variant] || "",
         " ",
         Sizes[size] || "",
-        ` active:text-white`,
+        ` active:text-white
+        disabled:opacity-50 disabled:cursor-not-allowed
+        py-2.5 px-8 font-bold text-lg
+      text-white hover:text-white/80
+        focus:outline-none `,
         className || "",
       ].join('')}
       {...rest}

@@ -15,7 +15,7 @@ export default function Button({
         Variants[variant] || "",
         " ",
         Sizes[size] || "",
-        `active:text-white`,
+        ` active:text-white`,
         className || "",
       ].join('')}
       {...rest}

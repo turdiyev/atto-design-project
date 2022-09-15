@@ -38,21 +38,12 @@ export default function Popover({
         {variant === 'Focus' && 'Focus to activate'}
       </Button>
 
-      <div className={`shadow-md transition duration-300 ease-in-out 
-          absolute
-
-          ${position === 'Top' && 'bottom-[70px]  left-1/2 transform -translate-x-1/2'}
-          ${position === 'Bottom' && 'top-[70px]  left-1/2 transform -translate-x-1/2'}
-          ${position === 'Right' && 'top-1/2 right-[-422px] transform -translate-y-1/2'}
-          ${position === 'Left' && 'top-1/2 left-[-422px] transform -translate-y-1/2'}
-
+      <div className={`shadow-md transition duration-300 ease-in-out absolute
+          ${PostionClasses[position] || ""}
+          ${VariantsClasses[variant] || ""}
           flex flex-col opacity-0 w-[400px] bg-white  rounded
-
-        ${variant === 'Hover' && 'peer-hover:opacity-100'}
-        ${(variant === 'Click' && open) && 'opacity-100'}
-        ${(variant === 'Focus' && open) && 'opacity-100'}
-        
         `}>
+
         <div className="relative p-4 rounded">
           <h1 className="text-md font-semibold mb-2 mt-0 ml-0 ">
             Title to context
@@ -88,4 +79,17 @@ export default function Popover({
 
     </div >
   )
+}
+
+const VariantsClasses = {
+  Hover: 'peer-hover:opacity-100',
+  Click: 'opacity-100',
+  Focus: 'opacity-100',
+}
+
+const PostionClasses = {
+  Top: 'bottom-[70px]  left-1/2 transform -translate-x-1/2',
+  Bottom: 'top-[70px]  left-1/2 transform -translate-x-1/2',
+  Left: 'top-1/2 left-[-422px] transform -translate-y-1/2',
+  Right: 'top-1/2 right-[-422px] transform -translate-y-1/2',
 }

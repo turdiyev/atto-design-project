@@ -4,7 +4,6 @@ import Popover from "./Popover";
 export default {
   title: "Elements/Popover",
   component: Popover,
-  argTypes: {},
   parameters: {
     layout: "centered",
   },

@@ -27,3 +27,23 @@ Focus.args = {
 };
 
 
+export const Top = Template.bind({});
+Top.args = {
+  position: 'Top'
+};
+
+export const Bottom = Template.bind({});
+Bottom.args = {
+  position: 'Bottom'
+};
+
+export const Right = Template.bind({});
+Right.args = {
+  position: 'Right'
+};
+
+
+export const Left = Template.bind({});
+Left.args = {
+  position: 'Left'
+};

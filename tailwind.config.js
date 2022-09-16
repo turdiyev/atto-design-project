@@ -19,6 +19,11 @@ module.exports = {
       fontFamily: {
         sans: ["Manrope", "sans-serif"],
       },
+
+      animation: {
+        fade: 'fadeOut 5s ease-in-out',
+      },
+
     },
   },
   variants: {

@@ -5,14 +5,10 @@ module.exports = {
   darkMode: "class",  
   theme: {
     colors: {
+      ...colors,
       primary: "var(--color-primary)",
       secondary: "var(--color-secondary)",
       neutral: "var(--color-neutral)",
-      white: colors.white,
-      black: colors.black,
-      blue: colors.blue,
-      gray: colors.gray,
-      red: colors.red,
       transparent: 'transparent',
     },
     extend: {
@@ -27,5 +23,8 @@ module.exports = {
     },
   },
   plugins: [],
+  corePlugins: {
+    preflight: false // <== disable this!
+  },
   content: ["./src/**/*.{js,jsx,ts,tsx,html}", "./public/index.html"],
 };

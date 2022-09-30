@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Header } from "../../atto-design/components/layout/header/Header";
+import { Header } from "../../layout/header/Header";
 import "./page.css";
 
 type User = {

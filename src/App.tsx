@@ -1,55 +1,13 @@
-import React from "react";
-import logo from "./logo.svg";
-import { Counter } from "./components/features/counter/Counter";
+import Main from "containers/Main";
+import Login from "containers/Login";
+import Table from "containers/Table";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo w-[200px]" alt="logo" />
-        <Counter />
-        <p className="text-primary">
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span className="text-red-600">Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="text-3xl font-bold underline"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="text-3xl font-bold underline"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
+      <Login />
+      <Table />
+      <Main />
     </div>
   );
 }

@@ -58,7 +58,7 @@ export default function Sidebar({}: Props) {
                 
               </MenuItem>
 
-              <MenuItem title="Общие показатели" withPinIcon>
+              <MenuItem title="Общие показатели" pinnable>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -75,7 +75,7 @@ export default function Sidebar({}: Props) {
                 </svg>
               </MenuItem>
 
-              <MenuItem title="Наличные оплаты" withPinIcon>
+              <MenuItem title="Наличные оплаты" pinnable>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -91,7 +91,7 @@ export default function Sidebar({}: Props) {
                   />
                 </svg>
               </MenuItem>
-              <MenuItem title="История" withPinIcon>
+              <MenuItem title="История" pinnable>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -129,7 +129,7 @@ export default function Sidebar({}: Props) {
                 </svg>
               </MenuItem>
 
-              <MenuItem title="Общие показатели" withPinIcon>
+              <MenuItem title="Общие показатели" pinnable>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -146,7 +146,7 @@ export default function Sidebar({}: Props) {
                 </svg>
               </MenuItem>
 
-              <MenuItem title="Наличные оплаты" withPinIcon>
+              <MenuItem title="Наличные оплаты" pinnable>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -162,7 +162,7 @@ export default function Sidebar({}: Props) {
                   />
                 </svg>
               </MenuItem>
-              <MenuItem title="История" withPinIcon>
+              <MenuItem title="История" pinnable>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

@@ -5,9 +5,9 @@ import Table from "containers/Table";
 function App() {
   return (
     <div className="App">
-      <Login />
+      {/* <Login /> */}
       <Table />
-      <Main />
+      {/* <Main /> */}
     </div>
   );
 }

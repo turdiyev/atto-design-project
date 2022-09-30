@@ -33,8 +33,8 @@ withArrowIcon.args = {
   children: []
 };
 
-export const withPinIcon = Template.bind({});
+export const pinnable = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-withPinIcon.args = {
-  withPinIcon: true
+pinnable.args = {
+  pinnable: true
 };

@@ -165,10 +165,10 @@ const SubMenu = React.forwardRef(
       console.log("rect --- ", rect, el);
       if (rect) {
         if (rect.top < 0) {
-          wrapperRef.current?.parentElement?.classList.add("!top-2");
+          wrapperRef.current?.parentElement?.classList.add("!top-0");
         }
         if (rect.bottom > window.innerHeight) {
-          wrapperRef.current?.parentElement?.classList.add("!bottom-2");
+          wrapperRef.current?.parentElement?.classList.add("!bottom-0");
         }
         if (rect.top > rect.height / 2 && rect.bottom < window.outerHeight) {
           wrapperRef.current?.parentElement?.classList.add("-translate-y-1/2");
@@ -182,7 +182,7 @@ const SubMenu = React.forwardRef(
         timeout={100}
         classNames="!translate-x-0 !z-10 !opacity-100 "
         unmountOnExit
-        onEnter={onVisibleEnter}
+        onEntering={onVisibleEnter}
         onExited={onVisibleEnter}
       >
         <div

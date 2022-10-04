@@ -1,14 +1,21 @@
+import React, { useLayoutEffect, useState, useRef, useEffect } from "react";
+import { CSSTransition } from "react-transition-group";
+
 import { MenuItem } from "atto-design/components";
 import type { MenuItemProps } from "atto-design/components";
 import { ReactComponent as HomeIcon } from "assets/menu/bus-1.svg";
-import { ReactComponent as DiagramIcon } from "assets/menu/blackboard-business-chart.svg";
-import { useState } from "react";
-
+import { ReactComponent as DiagramIcon } from "assets/menu-icons/diagram.svg";
+import { ReactComponent as HistoryIcon } from "assets/menu-icons/history.svg";
+import { ReactComponent as ReportIcon } from "assets/menu-icons/report.svg";
+import { ReactComponent as SummaryIcon } from "assets/menu-icons/summary.svg";
+import { ReactComponent as TarifIcon } from "assets/menu-icons/tarif.svg";
+import { ReactComponent as BusIcon } from "assets/menu-icons/bus.svg";
+import { ReactComponent as QRIcon } from "assets/menu-icons/qr-icon.svg";
+import { ReactComponent as ZReportIcon } from "assets/menu-icons/z-report.svg";
 export default function MenuSidebar() {
   const [pinnedItems, setPinnedItems] = useState<{
     [key: string]: MenuItemProps | null;
   }>({});
-
   const onPinItemClick = (item: MenuItemProps) => {
     const foundItem = pinnedItems[item.title];
 
@@ -25,7 +32,7 @@ export default function MenuSidebar() {
     }
   };
   return (
-    <div className="bg-[#1F2A66] md:w-72 z-20 fixed  top-0 left-0 bottom-0 h-full">
+    <div className="bg-[#1F2A66] md:w-72 z-20 fixed overflow-auto  top-0 left-0 bottom-0 h-full">
       <div
         className={` flex transition-hidden duration-75 lg:flex  lefy-0  h-full min-h-screen py-4 flex-col justify-between`}
       >
@@ -70,7 +77,7 @@ export default function MenuSidebar() {
               ></MenuItem>
 
               {Object.keys(pinnedItems)
-                .filter(key=>pinnedItems[key])
+                .filter((key) => pinnedItems[key])
                 .map((key) => (
                   <MenuItem
                     {...(pinnedItems?.[key] || { title: "" })}
@@ -85,244 +92,32 @@ export default function MenuSidebar() {
               Показатели
             </h4>
             <ul className="flex flex-col space-y-2 pl-0">
-              <MenuItem
-                title="Диаграммы"
-                icon={
-                  <DiagramIcon
-                    style={{
-                      filter:
-                        "invert(50%) sepia(99%) saturate(348%) hue-rotate(93deg) brightness(92%) contrast(88%)",
-                    }}
-                  />
-                }
-              >
-                <SubMenu>
-                  <nav className="px-2">
-                    <h4 className="text-xs text-white/40 px-4 mb-3 font-bold ">
-                      Показатели
-                    </h4>
-                    <ul className="flex flex-col space-y-2 pl-0">
-                      <MenuItem
-                        pinnable
-                        pinOnClick={onPinItemClick}
-                        title="HI"
-                        icon={
-                          <DiagramIcon
-                            style={{
-                              filter:
-                                "invert(50%) sepia(99%) saturate(348%) hue-rotate(93deg) brightness(92%) contrast(88%)",
-                            }}
-                          />
-                        }
-                      ></MenuItem>
-
-                      <MenuItem
-                        title="ONE"
-                        pinnable
-                        pinOnClick={onPinItemClick}
-                        icon={
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className="h-5 w-5"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6"
-                            />
-                          </svg>
-                        }
-                      ></MenuItem>
-
-                      <MenuItem
-                        title="TWO"
-                        pinnable
-                        pinOnClick={onPinItemClick}
-                        icon={
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className="w-5 h-5"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"
-                            />
-                          </svg>
-                        }
-                      ></MenuItem>
-                      <MenuItem
-                        title="Three"
-                        pinnable
-                        pinOnClick={onPinItemClick}
-                        icon={
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className="w-5 h-5"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"
-                            />
-                          </svg>
-                        }
-                      ></MenuItem>
-                    </ul>
-                  </nav>
-                  <nav className="px-2">
-                    <h4 className="text-xs text-white/40 px-4 mb-3 font-bold ">
-                      Показатели
-                    </h4>
-                    <ul className="flex flex-col space-y-2 pl-0">
-                      <MenuItem
-                        title="Диаграммы"
-                        icon={
-                          <DiagramIcon
-                            style={{
-                              filter:
-                                "invert(50%) sepia(99%) saturate(348%) hue-rotate(93deg) brightness(92%) contrast(88%)",
-                            }}
-                          />
-                        }
-                      ></MenuItem>
-
-                      <MenuItem
-                        title="Общие показатели"
-                        pinnable
-                        icon={
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className="h-5 w-5"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6"
-                            />
-                          </svg>
-                        }
-                      ></MenuItem>
-
-                      <MenuItem
-                        title="Наличные оплаты"
-                        pinnable
-                        icon={
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className="w-5 h-5"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"
-                            />
-                          </svg>
-                        }
-                      ></MenuItem>
-                      <MenuItem
-                        title="Наличные оплаты"
-                        pinnable
-                        icon={
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className="w-5 h-5"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"
-                            />
-                          </svg>
-                        }
-                      ></MenuItem>
-                    </ul>
-                  </nav>
-                </SubMenu>
-              </MenuItem>
-
-              <MenuItem
-                title="Общие показатели"
-                icon={
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="h-5 w-5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6"
-                    />
-                  </svg>
-                }
-              ></MenuItem>
-
-              <MenuItem
-                title="Наличные оплаты"
-                icon={
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="w-5 h-5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"
-                    />
-                  </svg>
-                }
-              ></MenuItem>
-              <MenuItem
-                title="Наличные оплаты"
-                icon={
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="w-5 h-5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"
-                    />
-                  </svg>
-                }
-              ></MenuItem>
+              {MenuItems.map((li) => (
+                <MenuItem title={li.title} icon={li.icon}>
+                  {(visible) => (
+                    <SubMenu visible={visible}>
+                      {li.children?.map((li2) => (
+                        <nav className="px-2">
+                          <h4 className="text-xs text-white/40 px-4 mb-3 font-bold ">
+                            {li2.title}
+                          </h4>
+                          <ul className="flex flex-col space-y-2 pl-0">
+                            {li2.children?.map((li3) => (
+                              <MenuItem
+                                title={li3.title}
+                                icon={li3.icon}
+                                pinnable={!li3.children}
+                                isPinned={!!pinnedItems[li3.title]}
+                                pinOnClick={onPinItemClick}
+                              />
+                            ))}
+                          </ul>
+                        </nav>
+                      ))}
+                    </SubMenu>
+                  )}
+                </MenuItem>
+              ))}
             </ul>
           </nav>
         </div>
@@ -356,12 +151,241 @@ export default function MenuSidebar() {
   );
 }
 
-function SubMenu({ children }: React.PropsWithChildren<unknown>) {
-  return (
-    <div className="fixed bg-[#1F2A66] left-72 rounded-xl -translate-y-1/2 drop-shadow-2xl">
-      <div className="flex flex-col space-y-4 py-5 border-solid border-0 border-l border-white/10">
-        {children}
-      </div>
-    </div>
-  );
-}
+const SubMenu = React.forwardRef(
+  (
+    { children, visible }: React.PropsWithChildren<{ visible: boolean }>,
+    ref: any
+  ) => {
+    const nodeRef = useRef(null);
+    const wrapperRef = useRef<HTMLDivElement | null>(null);
+    const onVisibleEnter = () => {
+      const el = wrapperRef.current;
+
+      const rect = el?.parentElement?.getBoundingClientRect();
+      console.log("rect --- ", rect, el);
+      if (rect) {
+        if (rect.top < 0) {
+          wrapperRef.current?.parentElement?.classList.add("!top-2");
+        }
+        if (rect.bottom > window.innerHeight) {
+          wrapperRef.current?.parentElement?.classList.add("!bottom-2");
+        }
+        if (rect.top > rect.height / 2 && rect.bottom < window.outerHeight) {
+          wrapperRef.current?.parentElement?.classList.add("-translate-y-1/2");
+        }
+      }
+    };
+    return (
+      <CSSTransition
+        in={visible}
+        nodeRef={nodeRef}
+        timeout={100}
+        classNames="!translate-x-0 !z-10 !opacity-100 "
+        unmountOnExit
+        onEnter={onVisibleEnter}
+        onExited={onVisibleEnter}
+      >
+        <div
+          ref={nodeRef}
+          className=" -z-10 -translate-x-4 fixed bg-[#1F2A66] left-72 rounded-xl overflow-hidden drop-shadow-2xl transition-transform duration-500"
+        >
+          <div
+            ref={wrapperRef}
+            className="flex flex-col space-y-4 my-5 border-solid border-0 border-l border-white/10 overflow-auto max-h-screen"
+          >
+            {children}
+          </div>
+        </div>
+      </CSSTransition>
+    );
+  }
+);
+
+type MenuItemType = Omit<MenuItemProps, "children"> & {
+  children?: MenuItemType[];
+};
+const MenuItems: MenuItemType[] = [
+  {
+    title: "Диаграммы",
+    icon: <DiagramIcon />,
+    children: [
+      {
+        title: "",
+        children: [],
+      },
+    ],
+  },
+  {
+    title: "История",
+    icon: <HistoryIcon />,
+    children: [],
+  },
+  {
+    title: "Отчеты",
+    icon: <ReportIcon />,
+    children: [
+      {
+        title: "Автобусы",
+        children: [
+          {
+            title: "Автобусы",
+            icon: <BusIcon />,
+          },
+          {
+            title: "Z-отчет автобусы",
+            icon: <ZReportIcon />,
+          },
+          {
+            title: "Z-отчет мобильный",
+            icon: <ZReportIcon />,
+          },
+          {
+            title: "Автобусы Агр. QR",
+            icon: <QRIcon />,
+          },
+          {
+            title: "Автобусы АТТО Агр. QR",
+            icon: <QRIcon />,
+          },
+        ],
+      },
+      {
+        title: "Автобусы",
+        children: [
+          {
+            title: "Автобусы",
+            icon: <BusIcon />,
+          },
+          {
+            title: "Z-отчет автобусы",
+            icon: <ZReportIcon />,
+          },
+          {
+            title: "Z-отчет мобильный",
+            icon: <ZReportIcon />,
+          },
+          {
+            title: "Автобусы Агр. QR",
+            icon: <QRIcon />,
+          },
+          {
+            title: "Автобусы АТТО Агр. QR",
+            icon: <QRIcon />,
+          },
+        ],
+      },
+      {
+        title: "Автобусы",
+        children: [
+          {
+            title: "Автобусы",
+            icon: <BusIcon />,
+          },
+          {
+            title: "Z-отчет автобусы",
+            icon: <ZReportIcon />,
+          },
+          {
+            title: "Z-отчет мобильный",
+            icon: <ZReportIcon />,
+          },
+          {
+            title: "Автобусы Агр. QR",
+            icon: <QRIcon />,
+          },
+          {
+            title: "Автобусы АТТО Агр. QR",
+            icon: <QRIcon />,
+          },
+        ],
+      },
+      {
+        title: "Автобусы",
+        children: [
+          {
+            title: "Автобусы",
+            icon: <BusIcon />,
+          },
+          {
+            title: "Z-отчет автобусы",
+            icon: <ZReportIcon />,
+          },
+          {
+            title: "Z-отчет мобильный",
+            icon: <ZReportIcon />,
+          },
+          {
+            title: "Автобусы Агр. QR",
+            icon: <QRIcon />,
+          },
+          {
+            title: "Автобусы АТТО Агр. QR",
+            icon: <QRIcon />,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Сводка",
+    icon: <SummaryIcon />,
+    children: [
+      {
+        title: "Автобусы",
+        children: [
+          {
+            title: "Автобусы",
+            icon: <BusIcon />,
+          },
+          {
+            title: "Z-отчет автобусы",
+            icon: <ZReportIcon />,
+          },
+          {
+            title: "Z-отчет мобильный",
+            icon: <ZReportIcon />,
+          },
+          {
+            title: "Автобусы Агр. QR",
+            icon: <QRIcon />,
+          },
+          {
+            title: "Автобусы АТТО Агр. QR",
+            icon: <QRIcon />,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Тарифы",
+    icon: <TarifIcon />,
+    children: [
+      {
+        title: "Автобусы",
+        children: [
+          {
+            title: "Автобусы",
+            icon: <BusIcon />,
+          },
+          {
+            title: "Z-отчет автобусы",
+            icon: <ZReportIcon />,
+          },
+          {
+            title: "Z-отчет мобильный",
+            icon: <ZReportIcon />,
+          },
+          {
+            title: "Автобусы Агр. QR",
+            icon: <QRIcon />,
+          },
+          {
+            title: "Автобусы АТТО Агр. QR",
+            icon: <QRIcon />,
+          },
+        ],
+      },
+    ],
+  },
+];

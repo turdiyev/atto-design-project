@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { ReactComponent as ArrowLeft } from "./arrow.svg";
 import { ReactComponent as PinIcon } from "assets/pin-big.svg";
 import { ReactComponent as PinnedIcon } from "assets/pinned.svg";
+
 export default function MenuItem(props: MenuItemProps) {
+  const [submenu, showSubmenu] = useState(false);
   const {
     children,
     title = "Menu Item",
@@ -16,6 +18,12 @@ export default function MenuItem(props: MenuItemProps) {
     if (event) event.preventDefault();
     pinOnClick?.(props);
   };
+  const onHover = (event: React.MouseEvent<any>) => {
+    showSubmenu(true);
+  };
+  const onMouseLeave = (event: React.MouseEvent<any>) => {
+    showSubmenu(false);
+  };
   return (
     <a
       href="/"
@@ -26,13 +34,17 @@ export default function MenuItem(props: MenuItemProps) {
     hover:text-white group cursor-pointer
     relative
     `}
+      onMouseOver={onHover}
+      onMouseLeave={onMouseLeave}
     >
-      <span className="flex flex-row flex-nowrap space-x-4 items-center">
+      <div className="flex flex-row flex-nowrap space-x-4 items-center">
         {icon}
 
         <span className=" text-md font-medium">{title}</span>
-        <span className="hidden group-hover:block ">{children}</span>
-      </span>
+        <div>
+          {typeof children === "function" ? children?.(submenu) : children}
+        </div>
+      </div>
       <span className="inline-flex">
         {pinnable ? (
           <span
@@ -65,14 +77,11 @@ export default function MenuItem(props: MenuItemProps) {
   );
 }
 
-export type MenuItemProps = React.DetailedHTMLProps<
-  React.AnchorHTMLAttributes<HTMLAnchorElement>,
-  HTMLAnchorElement
-> & {
-  children?: React.ReactNode;
+export interface MenuItemProps {
+  children?: ((visible: boolean) => React.ReactNode) | React.ReactNode;
   title: string;
   pinnable?: boolean;
   isPinned?: boolean;
   icon?: React.ReactNode;
   pinOnClick?: (props: MenuItemProps) => void;
-};
+}
